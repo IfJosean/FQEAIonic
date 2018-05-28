@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ 'SEARCH_TITLE' | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-item>
+    <ion-label>Filtrado por: </ion-label>
+    <ion-select [(ngModel)]="filtro" interface="popover">
+      <ion-option value="name">Nombre</ion-option>
+      <ion-option value="surname">Apellido</ion-option>
+      <ion-option value="role">Rol</ion-option>
+      <ion-option value="state">Estado</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-searchbar (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
+  <ion-list>
+    <button ion-item (click)="openItem(item)" *ngFor="let item of currentItems">
+      <ion-avatar item-start *ngIf="item.role">
+        <img [src]="'assets/img/speakers/eagle.jpg'" />
+      </ion-avatar>
+      <ion-avatar item-start *ngIf="!item.role">
+        <img [src]="'assets/img/speakers/turtle.jpg'" />
+      </ion-avatar>
+      <h2>{{item.name}}</h2>
+      <h3>{{item.surname}}</h3>
+      <h3 *ngIf="item.role==true">Admin</h3>
+      <h3 *ngIf="item.role==false">No Admin</h3>
+      <h3 *ngIf="item.state==true">Active</h3>
+      <h3 *ngIf="item.state==false">No Active</h3>
+
+      <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
+    </button>
+  </ion-list>
+</ion-content>

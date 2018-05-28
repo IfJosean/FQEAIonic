@@ -1,0 +1,54 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ item.name }}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="removeItem(item)">
+        <ion-icon name="remove"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>Name</ion-label>
+        <ion-input type="text"  name="name" value="{{item.name}}" #name></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>Surname</ion-label>
+        <ion-input type="text"  name="surname" value="{{item.surname}}" #surname></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>Rol </ion-label>
+        <ion-select [(ngModel)]="item.role" name="role" interface="popover" #role>
+          <ion-option [value]=false>No Admin</ion-option>
+          <ion-option [value]=true>Admin</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>State </ion-label>
+        <ion-select [(ngModel)]="item.state" name="state" interface="popover" #state>
+          <ion-option [value]=false>Inactive</ion-option>
+          <ion-option [value]=true>Active</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <div padding>
+        <button ion-button color="primary" (click)="modify(name.value, surname.value, role.value, state.value)">Modify</button>
+      </div>
+
+      <div padding>
+        <button ion-button color="danger" (click)="removeItem(name.value, surname.value, role.value, state.value)">Delete</button>
+      </div>
+
+    </ion-list>
+</ion-content>
